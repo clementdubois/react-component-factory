@@ -54,7 +54,7 @@ css = '' +
 
 console.log("Component Creation started :", name);
 
-fs.writeFile((path || ".") + "/index.js", jsx, function(err){
+fs.writeFile((path || ".") + "/index.js", index, function(err){
     if(err){
         return console.log(err);
     }
