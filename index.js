@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var fs = require('fs');
-var index, jsx, spec, css;
+var index, indexcss, jsx, spec, css;
 
 var name = process.argv[2];
 var path = process.argv[3];
@@ -9,6 +9,8 @@ index = '' +
     '"use strict";\n' +
     'module.exports = require("./'+ name+'.jsx");\n' +
     '\n';
+
+indexcss = '@import "./clubmed/ClubMedLogo.css";';
 
 jsx = '' +
   '"use strict";\n' +
@@ -59,6 +61,13 @@ fs.writeFile((path || ".") + "/index.js", index, function(err){
         return console.log(err);
     }
     console.log("index successfully created");
+});
+
+fs.writeFile((path || ".") + "/index.css", indexcss, function(err){
+  if(err){
+    return console.log(err);
+  }
+  console.log("indexcss successfully created");
 });
 
 fs.writeFile((path || ".") + "/"+name+".jsx", jsx, function(err){
