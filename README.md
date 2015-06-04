@@ -16,4 +16,3 @@ Or use it as a npm script :
 `npm i -g ./`
 
 `generate ComponentName [/path/to/destination]`
-git st
