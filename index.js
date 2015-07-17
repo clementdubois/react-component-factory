@@ -27,7 +27,7 @@ layouts.forEach(function(layout){
       if(err){
         return console.log(err.error);
       }
-      console.log((layout.dest + " successfully created").green);
+      return console.log((layout.dest + " successfully created").green);
     });
   });
 });
