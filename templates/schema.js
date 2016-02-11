@@ -9,6 +9,7 @@ const {{componentName}}Type = new graphql.GraphQLObjectType({
     {{this.name}} : {
       type : {{graphqlType this.type}},
       defaultValue : "{{this.default}}",
+      resolve : (parent) => parent.{{this.name}},
     },
 {{/each}}
   }),
