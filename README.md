@@ -14,7 +14,7 @@ Or use it as a npm script :
 
 `npm i -g ./`
 
-`generate-react-component ComponentName [/path/to/destination]`
+`generate-schema ComponentName [/path/to/destination] [*fieldName:fieldType:defaultValue]`
 
 ## Warning
 This script will create some boilerplate. It works well for simple case (scalar fields) but it doesn't handle well sub objects or lists.

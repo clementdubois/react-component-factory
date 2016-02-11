@@ -1,9 +1,9 @@
 {
   "name": "schema-factory",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate a boilerplate for a new react component",
   "bin": {
-    "generate-schema": "./index.js"
+    "generate-component-schema": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/clementdubois/react-component-factory#readme",
   "dependencies": {
-    "colors": "^1.1.0",
-    "handlebars": "^3.0.3"
+    "colors": "^1.1.2",
+    "handlebars": "^4.0.5"
   }
 }

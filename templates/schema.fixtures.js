@@ -1,6 +1,6 @@
 "use strict";
 
-const Test = require("../../../utils").Test;
+const Test = require("{{utilsPath}}").Test;
 
 module.exports = Test.Fixture.create({
 {{#each fields}}

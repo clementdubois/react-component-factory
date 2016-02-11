@@ -4,8 +4,15 @@ const colors = require('colors');
 const Handlebars = require('handlebars');
 
 const name = process.argv[2];
-const path = process.argv[3];
+const dest = process.argv[3];
 const fields = process.argv.slice(4);
+const utilsPath = getUtilsPath(dest);
+
+function getUtilsPath(src){
+  const pathSplit = src.split("/");
+  const upPathNumber = pathSplit.length - pathSplit.findIndex((element) => element === "src") - 1;
+  return new Array(upPathNumber).fill("..").concat("utils").join("/");
+}
 
 const layouts = [
   {"file" : "schema.js", "dest" : name + ".js"},
@@ -36,8 +43,8 @@ layouts.forEach((layout) => {
     if(err){
       return console.err(err.error);
     }
-    const result = Handlebars.compile(data)({componentName: name, fields : mapFields(fields)});
-    fs.writeFile((path || ".") + "/" + layout.dest, result, (err) => {
+    const result = Handlebars.compile(data)({componentName: name, fields : mapFields(fields), utilsPath : utilsPath});
+    fs.writeFile((dest || ".") + "/" + layout.dest, result, (err) => {
       if(err){
         return console.err(err.error);
       }

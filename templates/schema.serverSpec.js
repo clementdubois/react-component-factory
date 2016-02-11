@@ -3,7 +3,7 @@
 const graphql = require("graphql");
 const expect = require("chai").expect;
 const sinon = require("sinon");
-const expectType = require("../../../utils").Test.Graphql.expectType;
+const expectType = require("{{utilsPath}}").Test.Graphql.expectType;
 const {{componentName}} = require("./{{componentName}}").query;
 const fixture = require("./{{componentName}}.fixtures");
 
