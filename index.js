@@ -1,31 +1,45 @@
 #!/usr/bin/env node
-var fs = require('fs');
-var colors = require('colors');
-var Handlebars = require('handlebars');
-var index, indexcss, jsx, spec, css;
+const fs = require('fs');
+const colors = require('colors');
+const Handlebars = require('handlebars');
 
-var name = process.argv[2];
-var path = process.argv[3];
+const name = process.argv[2];
+const path = process.argv[3];
+const fields = process.argv.slice(4);
 
-var layouts = [
-  {"file" : "index.js", "dest" : "index.js"},
-  {"file" : "index.css", "dest" : "index.css"},
-  {"file" : "Component.jsx", "dest" : name + ".jsx"},
-  {"file" : "Component.spec.js", "dest" : name + ".spec.js"},
-  {"file" : "Component.css", "dest" : name + ".css"}
+const layouts = [
+  {"file" : "schema.js", "dest" : name + ".js"},
+  {"file" : "schema.serverSpec.js", "dest" : name + ".serverSpec.js"},
+  {"file" : "schema.propTypes.js", "dest" : name + ".propTypes.js"},
+  {"file" : "schema.fixtures.js", "dest" : name + ".fixtures.js"},
 ];
 
-console.log("Component Creation started :".rainbow, name.rainbow);
+console.log("Schema Creation started :".rainbow, name.rainbow);
 
-layouts.forEach(function(layout){
-  fs.readFile(__dirname + '/templates/' + layout.file, 'utf8', function(err, data){
+function mapFields(fields) {
+  return fields.map((field) => {
+    const fieldsDetails = field.split(":");
+    return {
+      name : fieldsDetails[0],
+      type : fieldsDetails[1],
+      default : fieldsDetails[2]
+    };
+  });
+}
+
+Handlebars.registerHelper('graphqlType', require("./templates/helpers").graphqlType);
+Handlebars.registerHelper('proptype', require("./templates/helpers").proptype);
+
+
+layouts.forEach((layout) => {
+  fs.readFile(__dirname + '/templates/' + layout.file, 'utf8', (err, data) => {
     if(err){
-      return console.log(err.error);
+      return console.err(err.error);
     }
-    var result = Handlebars.compile(data)({name: name});
-    fs.writeFile((path || ".") + "/" + layout.dest, result, function(err){
+    const result = Handlebars.compile(data)({componentName: name, fields : mapFields(fields)});
+    fs.writeFile((path || ".") + "/" + layout.dest, result, (err) => {
       if(err){
-        return console.log(err.error);
+        return console.err(err.error);
       }
       return console.log((layout.dest + " successfully created").green);
     });

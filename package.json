@@ -1,9 +1,9 @@
 {
-  "name": "react-component-factory",
-  "version": "0.2.1",
+  "name": "schema-factory",
+  "version": "1.0.1",
   "description": "Generate a boilerplate for a new react component",
   "bin": {
-    "generate-react-component": "./index.js"
+    "generate-schema": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
